@@ -51,11 +51,11 @@ function loadFeed(id, cb) {
     contentType:"application/json",
     success: function (result, status){
 
-      var container = $('.feed'),
-          title = $('.header-title'),
-          entries = result.feed.entries,
-          entriesLen = entries.length,
-          entryTemplate = Handlebars.compile($('.tpl-entry').html());
+      const container = $('.feed'),
+            title = $('.header-title'),
+            entries = result.feed.entries,
+            entriesLen = entries.length,
+            entryTemplate = Handlebars.compile($('.tpl-entry').html());
 
       title.html(feedName);   // Set the header text
       container.empty();      // Empty out all previous entries
@@ -93,11 +93,12 @@ google.setOnLoadCallback(init);
  * until the DOM is ready.
  */
 $(function() {
-  var container = $('.feed'),
-      feedList = $('.feed-list'),
-      feedItemTemplate = Handlebars.compile($('.tpl-feed-list-item').html()),
-      feedId = 0,
-      menuIcon = $('.menu-icon-link');
+  const container = $('.feed'),
+        feedList = $('.feed-list'),
+        feedItemTemplate = Handlebars.compile($('.tpl-feed-list-item').html()),
+        menuIcon = $('.menu-icon-link');
+
+  let feedId = 0;
 
   /* Loop through all of our feeds, assigning an id property to
    * each of the feeds based upon its index within the array.
@@ -127,7 +128,7 @@ $(function() {
   /* When the menu icon is clicked on, we need to toggle a class
    * on the body to perform the hiding/showing of our menu.
    */
-  menuIcon.on('click', function() {
+  menuIcon.click(() => {
     $('body').toggleClass('menu-hidden');
   });
 }());
