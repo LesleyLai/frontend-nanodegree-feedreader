@@ -25,7 +25,7 @@ $(function() {
       allFeeds.forEach((entry) => {
         const url = entry.url;
         expect(url).toBeDefined();
-        expect(url).not.toBe(0);
+        expect(url).not.toEqual("");
       });
     });
 
@@ -36,7 +36,7 @@ $(function() {
       allFeeds.forEach((entry) => {
         const name = entry.name;
         expect(name).toBeDefined();
-        expect(name).not.toBe(0);
+        expect(name).not.toEqual("");
       });
     });
   });
@@ -68,7 +68,7 @@ $(function() {
     });
 
     it('has at lease one feed', () => {
-      const feeds = $('.feed').children();
+      const feeds = $('.feed .entry');
       expect(feeds.length).not.toBe(0);
     });
   });
@@ -77,9 +77,10 @@ $(function() {
     let initialString;
 
     beforeEach((done) => {
-      initialString = $(".feed :first-child").text()
-      console.log(initialString);
-      loadFeed(1, done);
+      loadFeed(0, () => {
+        initialString = $(".feed :first-child").text();
+        loadFeed(1, done);
+      });
     });
 
     it('changes content when load new feed', () => {
